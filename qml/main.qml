@@ -5,8 +5,8 @@ import QtQuick.Controls.Material
 ApplicationWindow {
     id: mainWindow
     width: 1440
-    height: 725
-    minimumHeight: 700
+    height: 900
+    minimumHeight: 750
     visible: true
     title: qsTr("GreenCity Technical Test")
 
