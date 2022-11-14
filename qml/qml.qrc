@@ -1,0 +1,12 @@
+<RCC>
+    <qresource prefix="/">
+        <file>SideBar.qml</file>
+        <file>main.qml</file>
+        <file>NavBar.qml</file>
+        <file>NavButton.qml</file>
+        <file>SideButton.qml</file>
+        <file>ViewsPopup.qml</file>
+        <file>CreateViewDialog.qml</file>
+        <file>CustomSpinBox.qml</file>
+    </qresource>
+</RCC>

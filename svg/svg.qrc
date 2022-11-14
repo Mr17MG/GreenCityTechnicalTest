@@ -1,0 +1,36 @@
+<RCC>
+    <qresource prefix="/">
+        <file>arrow.svg</file>
+        <file>camera.svg</file>
+        <file>close.svg</file>
+        <file>door.svg</file>
+        <file>dots.svg</file>
+        <file>icon.svg</file>
+        <file>inbox.svg</file>
+        <file>layout.svg</file>
+        <file>map.svg</file>
+        <file>menu-circle.svg</file>
+        <file>play.svg</file>
+        <file>refresh.svg</file>
+        <file>reports.svg</file>
+        <file>search.svg</file>
+        <file>setting.svg</file>
+        <file>shape.svg</file>
+        <file>star-fill.svg</file>
+        <file>star.svg</file>
+        <file>view-16.svg</file>
+        <file>view-25.svg</file>
+        <file>view-3.svg</file>
+        <file>view-36.svg</file>
+        <file>view-4-reverse.svg</file>
+        <file>view-4.svg</file>
+        <file>view-6-reverse.svg</file>
+        <file>view-6.svg</file>
+        <file>view-9.svg</file>
+        <file>view-grid.svg</file>
+        <file>view-horizontal.svg</file>
+        <file>view-vertical.svg</file>
+        <file>view.svg</file>
+        <file>plus.svg</file>
+    </qresource>
+</RCC>
