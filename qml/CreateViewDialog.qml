@@ -144,11 +144,11 @@ Dialog {
                 }
                 ListElement {
                     idNumber:4
-                    iconSource: "qrc:/view-4.svg"
+                    iconSource: "qrc:/view-grid.svg"
                 }
                 ListElement {
                     idNumber:5
-                    iconSource: "qrc:/view-6-reverse.svg"
+                    iconSource: "qrc:/view-4.svg"
                 }
                 ListElement {
                     idNumber:6
@@ -160,11 +160,11 @@ Dialog {
                 }
                 ListElement {
                     idNumber:8
-                    iconSource: "qrc:/view-4.svg"
+                    iconSource: "qrc:/view-4-reverse.svg"
                 }
                 ListElement {
                     idNumber:9
-                    iconSource: "qrc:/view-4-reverse.svg"
+                    iconSource: "qrc:/view-6-reverse.svg"
                 }
                 ListElement {
                     idNumber:10
@@ -280,13 +280,13 @@ Dialog {
 
         anchors {
             top:   nameField.bottom
-            topMargin: 10
+            topMargin: 12
             left: parent.left
-            leftMargin: 25
+            leftMargin: 36
         }
 
         Flow {
-
+            spacing: 4
             width: 89
             height: 56
 
@@ -310,6 +310,7 @@ Dialog {
 
             width: 89
             height: 56
+            spacing: 4
 
             Label {
                 leftPadding: 12
