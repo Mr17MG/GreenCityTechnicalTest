@@ -27,44 +27,41 @@ SpinBox {
     up.indicator: Rectangle {
         x: control.mirrored ? 5 : parent.width - width - 5
         y: (parent.height - height)/2
-        implicitWidth: 30
-        implicitHeight: 30
-        color: control.up.pressed ? "#4C4C4C" : "#6C6C6C"
+        implicitWidth: 24
+        implicitHeight: 24
+        color: control.up.pressed ? "#212121" : "#363636"
         radius: width
+        border.color: "#4C4C4C"
 
-        Text {
-            text: "+"
-            font.pixelSize: control.font.pixelSize * 3
-            color: "#DDDDDD"
-            anchors.fill: parent
-            fontSizeMode: Text.Fit
-            horizontalAlignment: Text.AlignHCenter
-            verticalAlignment: Text.AlignVCenter
+        Image {
+            source: "qrc:/plus-2.svg"
+            anchors.centerIn: parent
+            width: 14
+            height: 14
+            sourceSize: Qt.size(width,height)
         }
     }
 
     down.indicator: Rectangle {
         x: control.mirrored ? parent.width - width - 5 : 5
         y: (parent.height - height)/2
-        implicitWidth: 30
-        implicitHeight: 30
-        color: control.down.pressed ? "#4C4C4C" : "#6C6C6C"
+        implicitWidth: 24
+        implicitHeight: 24
+        color: control.down.pressed ? "#212121" : "#363636"
         radius: width
-
-        Text {
-            text: "-"
-            font.pixelSize: control.font.pixelSize * 3
-            color: "#DDDDDD"
-            anchors.fill: parent
-            fontSizeMode: Text.Fit
-            horizontalAlignment: Text.AlignHCenter
-            verticalAlignment: Text.AlignVCenter
+        border.color: "#4C4C4C"
+        Image {
+            source: "qrc:/minus.svg"
+            anchors.centerIn: parent
+            width: 14
+            height: 3.5
+            sourceSize: Qt.size(width,height)
         }
     }
 
     background: Rectangle {
         implicitWidth: 150
         radius: 48
-        color:"#2C2C2C"
+        color:"#191919"
     }
 }

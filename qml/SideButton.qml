@@ -7,8 +7,15 @@ Button {
     height: 48
     flat: true
 
+    topInset: 0
+    bottomInset: 0
+    leftInset: 0
+    rightInset: 0
+
+    Material.background: "#262626"
+
     icon {
-        width :20
-        height: 20
+        width: 40
+        height: 40
     }
 }

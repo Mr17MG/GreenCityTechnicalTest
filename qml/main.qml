@@ -11,13 +11,32 @@ ApplicationWindow {
     title: qsTr("GreenCity Technical Test")
 
     Material.theme: Material.Dark
-    Material.primary: "#13EC91"
-    Material.accent: "#13EC91"
+    Material.primary: "#1FBE72"
+    Material.accent: "#1FBE72"
+
+    flags: Qt.Window | Qt.CustomizeWindowHint | Qt.WindowSystemMenuHint
+
+    color: "transparent"
 
 
-   header: NavBar {
+    FontLoader {
+        id: appFont
+        source: "qrc:/product-sans-regular.ttf"
+    }
+
+    font {
+        family: appFont.name
+    }
+
+    background: Rectangle {
+        color: "#121212"
+        radius: 16
+    }
+
+    header: NavBar {
         id: navbar
         height: 40
+        radius: mainWindow.background.radius
     }
 
     SideBar {
@@ -25,9 +44,11 @@ ApplicationWindow {
         width: 48
         height: parent.height
 
+        radius: mainWindow.background.radius
+
         anchors {
             top: navbar.bottom
-            topMargin: 2
+            topMargin: 4
             left: parent.left
         }
     }
@@ -35,9 +56,10 @@ ApplicationWindow {
     ViewsPopup {
         id: viewspop
 
-        x:sidebar.x + sidebar.width + 2
+        x: sidebar.x + sidebar.width + 4
         y: sidebar.y
-        width: 300
-        height: parent.height
+
+        width: 307
+        height: parent.height - y
     }
 }

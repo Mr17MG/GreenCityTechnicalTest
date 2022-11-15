@@ -7,79 +7,127 @@ import QtQuick.Layouts
 Dialog {
     id: root
 
+    background: Rectangle {
+        color: "#212121"
+        radius: 4
+    }
+
     padding: 0
+    topInset: 0
+    bottomInset: 0
     closePolicy : Dialog.NoAutoClose
 
-    header: RowLayout {
-        height: 30
-        Image {
-            source: "qrc:/view-3.svg"
-            sourceSize: Qt.size(width,height)
-            Layout.margins: 10
-        }
+    header:Item {
+        height: 48
+        width: parent.width
 
-        Label {
-            text:qsTr("Create View")
-            Layout.fillWidth: true
-        }
+        RowLayout {
+            anchors.fill: parent
 
-        Button {
-            Layout.preferredWidth: 48
-            Layout.preferredHeight: 48
-            Layout.alignment: Qt.AlignRight
-
-            flat: true
-            icon {
-                source : "qrc:/close.svg"
+            Image {
+                source: "qrc:/view-3.svg"
+                sourceSize: Qt.size(width,height)
+                Layout.leftMargin: 14
+                Layout.alignment: Qt.AlignVCenter
+                Layout.preferredWidth: 24
+                Layout.preferredHeight: 24
             }
 
-            onClicked: root.close()
+            Label {
+                text:qsTr("Create View")
+                Layout.fillWidth: true
+                Layout.alignment: Qt.AlignVCenter | Qt.AlignLeft
+                font.bold: true
+            }
+
+            Button {
+                Layout.preferredWidth: 48
+                Layout.preferredHeight: 48
+                Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
+
+                flat: true
+                padding: 0
+
+                topInset: 0
+                bottomInset: 0
+                rightInset: 0
+                leftInset: 0
+
+                icon {
+                    width: 24
+                    height: 24
+                    source : "qrc:/close.svg"
+                }
+
+                onClicked: root.close()
+            }
+
+        }
+
+        Rectangle {
+            id: hLine
+            width: parent.width
+            height: 1
+            opacity: 0.05
+            anchors {
+                bottom: parent.bottom
+                bottomMargin: -4
+            }
+        }
+    }
+
+
+    Label {
+        id: shortcutLbl
+
+        text: qsTr("Shortcuts")
+        color: "#999999"
+        horizontalAlignment: Label.AlignHCenter
+
+        font {
+            pixelSize: 13
+        }
+
+        anchors {
+            top: parent.top
+            left: parent.left
+            leftMargin: 36
         }
     }
 
     Rectangle {
-        id: hLine
-        width: parent.width
-        height: 1
-        opacity: 0.4
-        anchors {
-            top: parent.top
-            topMargin: 2
-            horizontalCenter: parent.horizontalCenter
-        }
-    }
-
-    GroupBox {
         id: shortcutGrp
 
-        height: 150
-        padding: 0
+        height: 124
 
-        label: Label {
-            text: qsTr("Shortcuts")
-            opacity: 0.8
-            font {
-                pixelSize: 12
-            }
-        }
+        color: "#262626"
+        border.color: "#212121"
+        radius: 4
+
 
         anchors {
-            top: parent.top
-            topMargin: 10
+            top: shortcutLbl.bottom
+            topMargin: 4
             left: parent.left
-            leftMargin: 25
+            leftMargin: 24
 
             right: parent.right
-            rightMargin: 25
+            rightMargin: 24
         }
 
         GridView {
             id: gridView
 
-            anchors.fill: parent
+            anchors {
+                fill: parent
+                margins: 12
+            }
 
-            cellWidth: 50
-            cellHeight: 50
+            interactive: false
+
+            cellWidth: 51
+            cellHeight: 51
+
 
             model: ListModel {
                 ListElement {
@@ -134,20 +182,39 @@ Dialog {
             }
 
             delegate:Item {
+
                 width: gridView.cellWidth
                 height: gridView.cellHeight
+
                 RoundButton {
                     width: 48
                     height: 48
                     radius: 2
                     flat: true
-                    //            checkable: true
+
                     ButtonGroup.group: btnGroup
 
+                    padding: 0
+                    Material.background: checked ? "#4C4C4C"
+                                                 : "#333333"
+
+                    topInset: 0
+                    bottomInset: 0
+                    leftInset: 0
+                    rightInset: 0
+
+                    checkable: true
+
                     icon {
+                        width: 32
+                        height: 32
                         source: model.iconSource
+                        color: "#ACACAC"
                     }
-                    anchors.centerIn: parent
+
+                    anchors {
+                        centerIn: parent
+                    }
                 }
             }
 
@@ -162,43 +229,46 @@ Dialog {
         id: nameLbl
 
         text: qsTr("Name")
-        opacity: 0.8
-
+        color:"#999999"
+        leftPadding: 12
         anchors {
             top: shortcutGrp.bottom
-            topMargin: 10
+            topMargin: 4
             left: parent.left
-            leftMargin: 25
+            leftMargin: 36
         }
+
         font {
-            pixelSize: 11
+            pixelSize: 13
         }
     }
 
     TextField {
         id: nameField
         placeholderText: qsTr("Name")
+        placeholderTextColor: "#737373"
 
-        width: parent.width/2
-        height: 30
-        padding: 10
-        bottomPadding: 5
+        width: 168
+        height: 24
+        padding: 12
+        bottomPadding: 4
+        topPadding: 4
 
         font {
-            pixelSize: 11
+            pixelSize: 13
         }
 
         anchors {
             top: nameLbl.bottom
-            topMargin: 5
+            topMargin: 4
             left: parent.left
-            leftMargin: 25
+            leftMargin: 36
         }
 
         background: Rectangle {
-            color: "#4C4C4C"
-            border.color: "#6C6C6C"
-            radius: 5
+            color: "#333333"
+            border.color: "#4C4C4C"
+            radius: 6
         }
     }
 
@@ -206,7 +276,8 @@ Dialog {
         id: spinsFlow
 
         width: parent.width
-        spacing: 10
+        spacing: 24
+
         anchors {
             top:   nameField.bottom
             topMargin: 10
@@ -216,77 +287,89 @@ Dialog {
 
         Flow {
 
-            width: 100
-            height: 60
+            width: 89
+            height: 56
 
             Label {
-                leftPadding: 10
+                leftPadding: 12
                 text: qsTr("Rows")
+                font.pixelSize: 13
+                color: "#999999"
             }
 
             CustomSpinBox {
-                width: 100
-                height: 40
+                width: 89
+                height: 36
                 from: 1
                 to:6
-                font.pixelSize: 13
+                font.pixelSize: 11
             }
         }
 
         Flow {
 
-            width: 100
-            height: 60
+            width: 89
+            height: 56
 
             Label {
-                leftPadding: 10
+                leftPadding: 12
                 text: qsTr("Columns")
+                font.pixelSize: 13
+                color: "#999999"
             }
 
             CustomSpinBox {
-                width: 100
-                height: 40
+                width: 89
+                height: 36
                 from: 1
                 to:6
-                font.pixelSize: 13
+                font.pixelSize: 11
             }
         }
     }
 
 
     Rectangle {
-        color: "#4C4C4C"
-        border.color: "#6C6C6C"
+        color: "#262626"
+        border.color: "#4C4C4C"
+
+        width: 332
+        height: 332
+        radius: 4
 
         anchors {
             top: spinsFlow.bottom
-            topMargin: 10
-            bottom: createBtn.top
-            bottomMargin: 10
+            topMargin: 12
             left: parent.left
-            leftMargin: 25
-            right: parent.right
-            rightMargin: 25
+            leftMargin: 24
         }
     }
 
     RoundButton {
         id: createBtn
 
+        width: 116
+        height: 40
+
         Material.background: "#1FBE72"
-        text:qsTr("Create")
-        radius: 5
-        leftPadding: 30
-        rightPadding: 30
+        text: qsTr("Create")
+        radius: 4
+
+        topInset: 0
+        bottomInset: 0
+        rightInset: 0
+        leftInset: 0
+
         font {
-            pixelSize: 14
+            pixelSize: 17
             capitalization: Font.MixedCase
         }
+
         anchors {
             bottom: parent.bottom
-            bottomMargin: 10
+            bottomMargin: 24
             right: parent.right
-            rightMargin: 25
+            rightMargin: 24
         }
     }
 }

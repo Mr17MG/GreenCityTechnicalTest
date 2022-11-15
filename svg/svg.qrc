@@ -32,5 +32,7 @@
         <file>view-vertical.svg</file>
         <file>view.svg</file>
         <file>plus.svg</file>
+        <file>minus.svg</file>
+        <file>plus-2.svg</file>
     </qresource>
 </RCC>

@@ -8,5 +8,6 @@
         <file>ViewsPopup.qml</file>
         <file>CreateViewDialog.qml</file>
         <file>CustomSpinBox.qml</file>
+        <file>WindowButton.qml</file>
     </qresource>
 </RCC>

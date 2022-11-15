@@ -6,37 +6,92 @@ import QtQuick.Layouts
 
 Popup {
     id: root
+
     Component.onCompleted: {
         createBtn.clicked()
     }
 
+    visible: true
+    modal: false
+    padding: 0
+    closePolicy: Popup.NoAutoClose
+
+    background: Rectangle {
+        id: backgroundRectangle
+
+        color: "#212121"
+        radius: 4
+    }
+
+    Rectangle { //remove bottom-left and bottom-right radius
+        height: backgroundRectangle?.radius ?? 0
+        width: parent.width
+        color: backgroundRectangle?.color ?? ""
+        anchors {
+            bottom: parent.bottom
+        }
+    }
+
     RowLayout {
         id: headerLayout
+
         spacing: 0
         width: parent.width
-        height: 40
+        height: 48
+
         Label {
             Layout.fillWidth: true
-            text: qsTr("Views")
-        }
+            Layout.leftMargin: 12
+            Layout.topMargin: 12
+            Layout.bottomMargin: 12
 
-        Button {
-            flat: true
-            Layout.alignment: Qt.AlignRight
-            Layout.preferredWidth: 40
-            Layout.preferredHeight: 40
-            icon {
-                source: "qrc:/refresh.svg"
+            text: qsTr("Views")
+
+            font {
+                pixelSize: 20
             }
         }
 
         Button {
             flat: true
-            padding: 0
+
             Layout.alignment: Qt.AlignRight
-            Layout.preferredWidth: 40
-            Layout.preferredHeight: 40
+            Layout.preferredWidth: 38
+            Layout.preferredHeight: 48
+
+            topInset: 0
+            bottomInset: 0
+            leftInset: 0
+            rightInset: 0
+            padding: 12
+            rightPadding: 6
+            leftPadding:  6
+
             icon {
+                width: 24
+                height: 24
+                source: "qrc:/refresh.svg"
+            }
+        }
+
+        Button {
+            id: closeBtn
+            flat: true
+
+            Layout.alignment: Qt.AlignRight
+            Layout.preferredWidth: 38
+            Layout.preferredHeight: 48
+
+            topInset: 0
+            bottomInset: 0
+            leftInset: 0
+            rightInset: 0
+            padding: 12
+            leftPadding:  6
+
+            icon {
+                width: 24
+                height: 24
                 source: "qrc:/close.svg"
             }
         }
@@ -46,10 +101,10 @@ Popup {
         id: hLine
         width: parent.width
         height: 1
-        opacity: 0.4
+        opacity: 0.05
         anchors {
             top: headerLayout.bottom
-            topMargin: 2
+            topMargin: 5
             horizontalCenter: parent.horizontalCenter
         }
     }
@@ -57,33 +112,46 @@ Popup {
     TextField {
         id: nameField
         placeholderText: qsTr("Name")
-
-        width: parent.width
+        placeholderTextColor: "#808080"
         height: 40
-        padding: 10
+        padding: 12
+        bottomPadding: 6
 
         font {
-            pixelSize: 11
+            pixelSize: 13
         }
 
         anchors {
             top: hLine.bottom
-            topMargin: 5
+            topMargin: 12
+            left: parent.left
+            leftMargin: 12
+            right: parent.right
+            rightMargin: 12
         }
 
         background: Rectangle {
-            color: "#4C4C4C"
-            border.color: "#6C6C6C"
-            radius: 5
+            color: "#333333"
+            border.color: "#4C4C4C"
+            radius: 6
         }
     }
 
     Button {
         id: createBtn
+
         text: qsTr("Create view")
         flat: true
         highlighted: true
+        height: 24
+        width: 106
+        padding: 0
+        topInset: 0
+        bottomInset: 0
+        leftInset: 0
+        rightInset: 0
 
+        spacing: 11
 
         icon {
             width: 12
@@ -93,12 +161,14 @@ Popup {
 
         font {
             capitalization: Font.MixedCase
-            pixelSize: 13
+            pixelSize: 15
         }
 
         anchors {
             top: nameField.bottom
-            topMargin: 5
+            topMargin: 12
+            left: parent.left
+            leftMargin: 12
         }
 
         onClicked: {
@@ -106,10 +176,10 @@ Popup {
             if(component.status === Component.Ready)
             {
                 var dialog = component.createObject(mainWindow)
-                dialog.width = 350
-                dialog.height = 620
-                dialog.x = (mainWindow.width+root.width-dialog.width)/2
-                dialog.y = (mainWindow.height+mainWindow.header.height-dialog.height)/2
+                dialog.width = 380
+                dialog.height = 752
+                dialog.x = (mainWindow.width + root.width - dialog.width) / 2
+                dialog.y = (mainWindow.height + mainWindow.header.height - dialog.height) / 2
                 dialog.open()
             }
             else
@@ -120,12 +190,13 @@ Popup {
 
     ListView {
         id: listview
-        spacing: 2
+        spacing: 4
         clip: true
         width: parent.width
 
         anchors {
             top: createBtn.bottom
+            topMargin: 16
             bottom: parent.bottom
         }
 
@@ -156,7 +227,8 @@ Popup {
         delegate: Rectangle {
             width: listview.width
             height: 48
-            color: model.index%2===0?"#474747":"transparent"
+            color: "#262626"
+
             Image {
                 id: iconImg
                 width: 24
@@ -167,24 +239,36 @@ Popup {
                 anchors {
                     verticalCenter: parent.verticalCenter
                     left: parent.left
-                    leftMargin: 5
+                    leftMargin: 12
                 }
             }
 
             Label {
                 text: model.viewName
+                elide: Qt.ElideRight
+
                 anchors {
                     verticalCenter: parent.verticalCenter
                     left: iconImg.right
-                    leftMargin: 5
+                    leftMargin: 10.5
+                    right: favBtn.left
                 }
             }
 
             Button {
                 id: favBtn
+
                 flat:true
+
                 width: 48
                 height: 48
+
+                padding: 12
+                topInset: 0
+                bottomInset: 0
+                leftInset: 0
+                rightInset: 0
+
                 icon {
                     source: model.isFavorite ? "qrc:/star-fill.svg"
                                              : "qrc:/star.svg"
@@ -192,10 +276,10 @@ Popup {
                                             : "#6C6C6C"
                 }
 
+
                 anchors {
                     verticalCenter: parent.verticalCenter
                     right: menuBtn.left
-                    rightMargin: 5
                 }
 
                 onClicked: {
@@ -205,25 +289,33 @@ Popup {
 
             Button {
                 id: menuBtn
+
                 flat:true
+
                 width: 48
                 height: 48
-                icon{
+
+                padding: 12
+
+                topInset: 0
+                bottomInset: 0
+                leftInset: 0
+                rightInset: 0
+
+                opacity: 0.4
+
+                icon {
+                    width: 24
+                    height: 24
                     source: "qrc:/dots.svg"
                 }
 
                 anchors {
                     verticalCenter: parent.verticalCenter
                     right: parent.right
-                    rightMargin: 5
                 }
             }
+
         }
     }
-
-
-    visible: true
-    modal: false
-    closePolicy: Popup.NoAutoClose
-
 }
